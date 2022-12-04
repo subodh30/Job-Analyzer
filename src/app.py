@@ -162,6 +162,6 @@ def read_from_db(request, db):
         data_filter['Company Name'] = rgx_company_name
     if skills != '':
         data_filter['skills'] = rgx_skills
-    
+
     data = db.jobs.find(data_filter)
     return DataFrame(list(data))
