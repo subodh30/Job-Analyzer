@@ -91,7 +91,6 @@ def search():
         print("into req post")
         print(db.get_collection)
         job_df = read_from_db(request, db)
-        print(job_df)
         job_count = job_df.shape[0]
         print(job_count)
         if job_df.empty:
@@ -144,7 +143,6 @@ def read_from_db(request, db):
     job_location = request.form['location']
     company_name = request.form['companyName']
     skills = request.form['skills']
-
     regex_char = ['.', '+', '*', '?', '^', '$', '(', ')', '[', ']', '{', '}', '|']
 
     for char in regex_char:
@@ -159,8 +157,6 @@ def read_from_db(request, db):
     data_filter = {}
     if job_title != '':
         data_filter['Job Title'] = rgx_title
-    if job_type != '':
-        data_filter['Employment type'] = rgx_type
     if job_location != '':
         data_filter['Location'] = rgx_location
     if company_name != '':
@@ -168,6 +164,5 @@ def read_from_db(request, db):
     if skills != '':
         data_filter['skills'] = rgx_skills
     
-    data = db.jobs.find({'Job Title': rgx_title})
-    
+    data = db.jobs.find(data_filter)
     return DataFrame(list(data))
