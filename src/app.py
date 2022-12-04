@@ -139,7 +139,6 @@ def read_from_db(request, db):
     Returns a DataFrame with the details
     """
     job_title = request.form['title']
-    job_type = request.form['jobtype']
     job_location = request.form['location']
     company_name = request.form['companyName']
     skills = request.form['skills']
