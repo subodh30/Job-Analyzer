@@ -15,7 +15,6 @@ from pandas import DataFrame  # noqa: E402
 from functools import wraps
 import re  # noqa: E402
 import numpy as np  # noqa: E402
-import pymongo
 
 app = Flask(__name__)
 
@@ -44,9 +43,6 @@ def login_required(f):
     return wrap
 
 
-
-
-
 @app.route('/signup')
 def sgup():
     """
@@ -54,6 +50,7 @@ def sgup():
     The index function renders the index.html page.
     """
     return render_template('signup.html')
+
 
 @app.route('/login')
 def lgin():
@@ -72,6 +69,7 @@ def index():
     """
     return render_template('index.html')
 
+
 @app.route('/login')
 def login():
     """
@@ -83,7 +81,6 @@ def login():
 
 @app.route('/search', methods=('GET', 'POST'))
 def search():
-    print(f"into search function ${request.method}")
     print(request)
     """
     Route: '/search'
@@ -92,6 +89,7 @@ def search():
     """
     if request.method == 'POST':
         print("into req post")
+        print(db.get_collection)
         job_df = read_from_db(request, db)
         print(job_df)
         job_count = job_df.shape[0]
@@ -142,7 +140,7 @@ def read_from_db(request, db):
     Returns a DataFrame with the details
     """
     job_title = request.form['title']
-    job_type = request.form['type']
+    job_type = request.form['jobtype']
     job_location = request.form['location']
     company_name = request.form['companyName']
     skills = request.form['skills']
@@ -169,6 +167,7 @@ def read_from_db(request, db):
         data_filter['Company Name'] = rgx_company_name
     if skills != '':
         data_filter['skills'] = rgx_skills
-
-    data = db.jobs.find(data_filter)
+    
+    data = db.jobs.find({'Job Title': rgx_title})
+    
     return DataFrame(list(data))
