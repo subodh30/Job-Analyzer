@@ -92,8 +92,9 @@ def search():
     """
     if request.method == 'POST':
         print("into req post")
+        print("db: ", db)
         job_df = read_from_db(request, db)
-        print(job_df)
+        print("job_df: ", job_df)
         job_count = job_df.shape[0]
         print(job_count)
         if job_df.empty:
@@ -141,12 +142,14 @@ def read_from_db(request, db):
     The read_from_db function reads the job details based on the input provided using regex.
     Returns a DataFrame with the details
     """
+    print(request.form)
     job_title = request.form['title']
-    job_type = request.form['type']
+    job_type = request.form['jobtype'] # Issue with reading type
+    print("read_from_db")
     job_location = request.form['location']
     company_name = request.form['companyName']
     skills = request.form['skills']
-
+    
     regex_char = ['.', '+', '*', '?', '^', '$', '(', ')', '[', ']', '{', '}', '|']
 
     for char in regex_char:
