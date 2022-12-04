@@ -149,7 +149,6 @@ def read_from_db(request, db):
         skills = skills.replace(char, '\\'+char)
 
     rgx_title = re.compile('.*' + job_title + '.*', re.IGNORECASE)
-    rgx_type = re.compile('.*' + job_type + '.*', re.IGNORECASE)
     rgx_location = re.compile('.*' + job_location + '.*', re.IGNORECASE)
     rgx_company_name = re.compile('.*' + company_name + '.*', re.IGNORECASE)
     rgx_skills = re.compile('.*' + skills + '.*', re.IGNORECASE)
