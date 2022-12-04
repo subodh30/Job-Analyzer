@@ -81,7 +81,6 @@ def login():
 
 @app.route('/search', methods=('GET', 'POST'))
 def search():
-    print(f"into search function ${request.method}")
     print(request)
     """
     Route: '/search'
@@ -90,8 +89,8 @@ def search():
     """
     if request.method == 'POST':
         print("into req post")
+        print(db.get_collection)
         job_df = read_from_db(request, db)
-        print(job_df)
         job_count = job_df.shape[0]
         print(job_count)
         if job_df.empty:
@@ -140,18 +139,15 @@ def read_from_db(request, db):
     Returns a DataFrame with the details
     """
     job_title = request.form['title']
-    job_type = request.form['type']
     job_location = request.form['location']
     company_name = request.form['companyName']
     skills = request.form['skills']
-
     regex_char = ['.', '+', '*', '?', '^', '$', '(', ')', '[', ']', '{', '}', '|']
 
     for char in regex_char:
         skills = skills.replace(char, '\\'+char)
 
     rgx_title = re.compile('.*' + job_title + '.*', re.IGNORECASE)
-    rgx_type = re.compile('.*' + job_type + '.*', re.IGNORECASE)
     rgx_location = re.compile('.*' + job_location + '.*', re.IGNORECASE)
     rgx_company_name = re.compile('.*' + company_name + '.*', re.IGNORECASE)
     rgx_skills = re.compile('.*' + skills + '.*', re.IGNORECASE)
@@ -159,8 +155,6 @@ def read_from_db(request, db):
     data_filter = {}
     if job_title != '':
         data_filter['Job Title'] = rgx_title
-    if job_type != '':
-        data_filter['Employment type'] = rgx_type
     if job_location != '':
         data_filter['Location'] = rgx_location
     if company_name != '':
