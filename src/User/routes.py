@@ -1,12 +1,14 @@
+'''
+These are the end points related to the user
+'''
+
+
 import sys
 # sys.path.append('../src')
 from src.app import app, mongodb_client
 from flask import Flask, render_template, request
 from src.User.models import User
 
-'''
-These are the end points related to the user
-'''
 
 @app.route('/user/signup', methods=['POST'])
 def signup():

@@ -1,11 +1,13 @@
+'''
+Contains user model functions
+'''
+
 from flask import jsonify, request, session, redirect, render_template
 from passlib.hash import pbkdf2_sha256
 from src.app import db, mongodb_client
 import uuid
 
-'''
-Contains user model functions
-'''
+
 
 class User:
     '''
