@@ -134,10 +134,10 @@ Thanks goes to these wonderful people.
 
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/kartikrawool"><img src="https://avatars.githubusercontent.com/u/55804665?v=4" width="100px;" alt=""/><br/><sub><b>Kartik Rawool</b></sub></a></td>
-    <td align="center"><a href="https://github.com/Naveen-Jayanna"><img src="https://avatars.githubusercontent.com/u/52947925?v=4" width="100px;" alt=""/><br/><sub><b>Naveen Jayanna</b></sub></a></td>
-    <td align="center"><a href="https://github.com/samarth-p"><img src="https://avatars.githubusercontent.com/u/42717178?v=4" width="100px;" alt=""/><br/><sub><b>Samarth Purushothaman</b></sub></a></td>
-    <td align="center"><a href="https://github.com/TejasPrabhu"><img src="https://avatars.githubusercontent.com/u/100992314?v=4" width="100px;" alt=""/><br/><sub><b>Tejas Prabhu</b></sub></a></td>
-    <td align="center"><a href="https://github.com/crmgogo"><img src="https://avatars.githubusercontent.com/u/55990000?v=4" width="100px;" alt=""/><br/><sub><b>Shubham Loya</b></sub></a></td>
+    <td align="center"><a href="https://github.com/ameyagv"><img src="https://avatars.githubusercontent.com/u/55804665?v=4" width="100px;" alt=""/><br/><sub><b>Ameya Vaichalkar</b></sub></a></td>
+    <td align="center"><a href="https://github.com/kunalpatil1810"><img src="https://avatars.githubusercontent.com/u/68049672?v=4" width="100px;" alt=""/><br/><sub><b>Kunal Patil</b></sub></a></td>
+    <td align="center"><a href="https://github.com/RoninS28"><img src="https://avatars.githubusercontent.com/u/60844691?v=4" width="100px;" alt=""/><br/><sub><b>Rohan Shiveshwarkar</b></sub></a></td>
+    <td align="center"><a href="https://github.com/subodh30"><img src="https://avatars.githubusercontent.com/u/22406193?v=4" width="100px;" alt=""/><br/><sub><b>Subodh Gujar</b></sub></a></td>
+    <td align="center"><a href="https://github.com/Yash-567"><img src="https://avatars.githubusercontent.com/u/46718837?v=4" width="100px;" alt=""/><br/><sub><b>Yash Sonar</b></sub></a></td>
   </tr>
 </table>
