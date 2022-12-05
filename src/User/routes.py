@@ -1,3 +1,4 @@
+from flask import render_template
 from src.app import app
 from src.User.models import User
 
@@ -5,6 +6,11 @@ from src.User.models import User
 @app.route('/user/signup', methods=['POST'])
 def signup():
     return User().signup()
+
+
+@app.route('/user/signup', methods=['GET'])
+def showSignupPage():
+    return render_template('signup.html')
 
 
 @app.route('/user/logout')
