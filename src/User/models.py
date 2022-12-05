@@ -5,6 +5,9 @@ import uuid
 
 
 class User:
+    '''
+    
+    '''
 
     def startSession(self, user):
         del user['password']
