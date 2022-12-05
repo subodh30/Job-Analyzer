@@ -37,7 +37,7 @@ class User:
         user = db.users.find_one({'email': request.form.get('email')})
         if user and pbkdf2_sha256.verify(str(request.form.get('password')), user['password']):
             self.startSession(user)
-            return render_template('get_job_postings.html')
+            return redirect('/search')
         return (jsonify({'error': 'Invalid login credentials'}), 401)
 
     def showProfile(self):
