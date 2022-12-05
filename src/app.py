@@ -113,10 +113,10 @@ def search():
     <style>
         .table-class {border-collapse: collapse;    margin: 24px 0;     font-size: 15px; background-color: #000000;
         font-family: sans-serif;    min-width: 500px;    }
-        .table-class thead tr {background-color: #002147;    color: #ffffff;    text-align: left; }
+        .table-class thead tr {background-color: #002147;    color: #ffffff;    text-align: left; font-weight: 600; }
         .table-class th,.table-class td {    text-align:center; padding: 12.4px 15.2px;}
         .table-class tbody tr {border-bottom: 1px solid #ffffff; border-top-left-radius: 20px; margin: 10px 0; border: 1px;border-color: white;}
-        .table-class tbody tr:nth-of-type(even) {    background-color: #20b2aa; }
+        .table-class tbody tr:nth-of-type(even) {    background-color: #20b2aa; color: white;}
         .table-class tbody tr:nth-of-type(odd) {    background-color: #ffe4c4; }
         .table-class tbody tr:last-of-type {    border-bottom: 2.1px solid #009878;}
         .table-class tbody tr.active-row {  font-weight: bold;    color: #009878;}
@@ -126,7 +126,7 @@ def search():
             titles=job_df.columns.values)
     return render_template('get_job_postings.html')
 #         .table-class tbody tr:nth-of-type(odd) {    background-color: #e4ad46; }
-
+# ffe4c4
 
 def add(db, job_data):
     """
