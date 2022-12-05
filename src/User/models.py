@@ -10,7 +10,7 @@ class User:
         del user['password']
         session['logged_in'] = True
         session['user'] = user
-        return (jsonify(user), 200)
+        # return (jsonify(user), 200)
 
     def signup(self):
         # print(request.form)
@@ -36,7 +36,8 @@ class User:
     def login(self):
         user = db.users.find_one({'email': request.form.get('email')})
         if user and pbkdf2_sha256.verify(str(request.form.get('password')), user['password']):
-            return self.startSession(user)
+            self.startSession(user)
+            return render_template('get_job_postings.html')
         return (jsonify({'error': 'Invalid login credentials'}), 401)
 
     def showProfile(self):
