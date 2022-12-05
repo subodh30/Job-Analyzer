@@ -34,6 +34,10 @@ Unlike many other job portals, JobCruncher is a simple, lightweight, online tool
 
 Further, it helps to provide the user insights about the job postings and as the scraper is executed every day, the user is always provided with the most recent job postings.
 
+# Deployment and Scalability
+<p align="center">
+<img height="700" width="1200" src="https://github.com/subodh30/Job-Analyzer/blob/ReadmeEnhancements/src/static/arch.jpg">
+</p>
 
 # Installation
 
