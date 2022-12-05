@@ -34,6 +34,9 @@ Unlike many other job portals, JobCruncher is a simple, lightweight, online tool
 
 Further, it helps to provide the user insights about the job postings and as the scraper is executed every day, the user is always provided with the most recent job postings.
 
+# Deployment and Scalability
+![arch](https://user-images.githubusercontent.com/57044378/205757699-815515cd-a07b-4d64-8ca5-f61f9e82c080.jpg)
+The Job Analyzer applocation can be deployed on any cloud service provider like AWS, GCP, Azure using docker image created by docker file. We have created deployment service and route yaml files for kubernetes to access the application publically. As the number of users increases from 100, 1000, 10000.... we need to increase the number of container instances. As we have Global Traffic Manager (GTM) to load balance multiple user requests to different datacenters through Local Traffic Manager (LTM) using Ngnix. In the cloud we also have a HA proxy/services to distribute each request to a container which is having the least load to serve the request. In the backend we have mongodb deployed on different datacenters which will asynchronously replicate the data using multileader architecture. By using this architecture we can accomodate every user request without affecting the performance of our application. We will be using A:A deployments to increase the availability of our application.
 
 # Installation
 
@@ -59,16 +62,10 @@ Check [INSTALL.md](https://github.com/TejasPrabhu/Job-Analyzer/blob/main/INSTALL
   
   ```
 
-* Setup and Connect mongoDB database and Run scraper.py to fetch job details
-  ```
-    python scraper.py
+* After running command 'flask --app src.app run', in src directory you are good to go
   
   ```
-
-* After running command 'flask run --debug', in src directory you are good to go
-  
-  ```
-    flask run --debug
+    flask --app src.app run
 
   ```
   
@@ -131,10 +128,10 @@ Thanks goes to these wonderful people.
 
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/kartikrawool"><img src="https://avatars.githubusercontent.com/u/55804665?v=4" width="100px;" alt=""/><br/><sub><b>Kartik Rawool</b></sub></a></td>
-    <td align="center"><a href="https://github.com/Naveen-Jayanna"><img src="https://avatars.githubusercontent.com/u/52947925?v=4" width="100px;" alt=""/><br/><sub><b>Naveen Jayanna</b></sub></a></td>
-    <td align="center"><a href="https://github.com/samarth-p"><img src="https://avatars.githubusercontent.com/u/42717178?v=4" width="100px;" alt=""/><br/><sub><b>Samarth Purushothaman</b></sub></a></td>
-    <td align="center"><a href="https://github.com/TejasPrabhu"><img src="https://avatars.githubusercontent.com/u/100992314?v=4" width="100px;" alt=""/><br/><sub><b>Tejas Prabhu</b></sub></a></td>
-    <td align="center"><a href="https://github.com/crmgogo"><img src="https://avatars.githubusercontent.com/u/55990000?v=4" width="100px;" alt=""/><br/><sub><b>Shubham Loya</b></sub></a></td>
+    <td align="center"><a href="https://github.com/ameyagv"><img src="https://avatars.githubusercontent.com/u/55804665?v=4" width="100px;" alt=""/><br/><sub><b>Ameya Vaichalkar</b></sub></a></td>
+    <td align="center"><a href="https://github.com/kunalpatil1810"><img src="https://avatars.githubusercontent.com/u/68049672?v=4" width="100px;" alt=""/><br/><sub><b>Kunal Patil</b></sub></a></td>
+    <td align="center"><a href="https://github.com/RoninS28"><img src="https://avatars.githubusercontent.com/u/60844691?v=4" width="100px;" alt=""/><br/><sub><b>Rohan Shiveshwarkar</b></sub></a></td>
+    <td align="center"><a href="https://github.com/subodh30"><img src="https://avatars.githubusercontent.com/u/22406193?v=4" width="100px;" alt=""/><br/><sub><b>Subodh Gujar</b></sub></a></td>
+    <td align="center"><a href="https://github.com/Yash-567"><img src="https://avatars.githubusercontent.com/u/46718837?v=4" width="100px;" alt=""/><br/><sub><b>Yash Sonar</b></sub></a></td>
   </tr>
 </table>
