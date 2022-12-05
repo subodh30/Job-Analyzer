@@ -142,7 +142,6 @@ def read_from_db(request, db):
     Returns a DataFrame with the details
     """
     job_title = request.form['title']
-    job_type = request.form['type']
     job_location = request.form['location']
     company_name = request.form['companyName']
     skills = request.form['skills']
@@ -153,7 +152,6 @@ def read_from_db(request, db):
         skills = skills.replace(char, '\\'+char)
 
     rgx_title = re.compile('.*' + job_title + '.*', re.IGNORECASE)
-    rgx_type = re.compile('.*' + job_type + '.*', re.IGNORECASE)
     rgx_location = re.compile('.*' + job_location + '.*', re.IGNORECASE)
     rgx_company_name = re.compile('.*' + company_name + '.*', re.IGNORECASE)
     rgx_skills = re.compile('.*' + skills + '.*', re.IGNORECASE)
@@ -161,8 +159,6 @@ def read_from_db(request, db):
     data_filter = {}
     if job_title != '':
         data_filter['Job Title'] = rgx_title
-    if job_type != '':
-        data_filter['Employment type'] = rgx_type
     if job_location != '':
         data_filter['Location'] = rgx_location
     if company_name != '':
