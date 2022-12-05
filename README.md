@@ -62,16 +62,10 @@ Check [INSTALL.md](https://github.com/TejasPrabhu/Job-Analyzer/blob/main/INSTALL
   
   ```
 
-* Setup and Connect mongoDB database and Run scraper.py to fetch job details
-  ```
-    python scraper.py
+* After running command 'flask --app src.app run', in src directory you are good to go
   
   ```
-
-* After running command 'flask run --debug', in src directory you are good to go
-  
-  ```
-    flask run --debug
+    flask --app src.app run
 
   ```
   
