@@ -1,11 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Calistoga&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
 
 h1#getJobPostingsTitle{
     font-family: 'Calistoga', cursive;
-    color: antiquewhite;
+    font-family: 'Open Sans', sans-serif;
+    color: greenyellow;
     margin-top: 18px;
-    text-shadow: 1px 1px 1px black;
-    text-shadow: 1px 1px 3px lightseagreen;
+    /* text-shadow: 1px 1px 1px black;
+    text-shadow: 1px 1px 3px lightseagreen; */
+    text-shadow: 1px 1px 1px antiquewhite;
+    text-shadow: 6px 4px 1px rgba(0, 0, 0, 0.098);
 }
 
 div.jobFormDiv{
@@ -37,11 +41,13 @@ div.jobFormSubmitDiv{
 }
 
 button#jobFormSubmitButton{
-    font-size: 25px;
+    font-size: 27px;
     font-family: 'Calistoga', cursive;
+    font-family: 'Open Sans', sans-serif;
     border-radius: 30px;
+    font-weight: 700;
     width: 135px;
-    height: 45px;
+    height: 54px;
     border-width: 4px;
     border-color: antiquewhite;
     color: antiquewhite;
@@ -49,12 +55,17 @@ button#jobFormSubmitButton{
 }
 
 button#jobFormSubmitButton:hover{
-    color: orange;
+    color: greenyellow;
     background-color: whitesmoke;
-    border-color: antiquewhite;
+    border-color: whitesmoke;
+    text-shadow: 0px 0px 2px black;
+    text-shadow: 1px 2px 1px rgba(0, 0, 0, 0.098);
+
 }
 
 label.jobFormTitle{
     color: antiquewhite;
-    font-size: 18px;
+    font-size: 20px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.247);
+
 }
