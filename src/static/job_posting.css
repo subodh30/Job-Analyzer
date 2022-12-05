@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+
+h1#findJobPostingsTitle{
+    font-family: 'Open Sans', sans-serif;
+    color: greenyellow;
+    margin-top: 28px;
+    /* text-shadow: 1px 1px 1px black;
+    text-shadow: 1px 1px 3px lightseagreen; */
+    text-shadow: 1px 1px 1px antiquewhite;
+    text-shadow: 6px 4px 1px rgba(0, 0, 0, 0.098);
+}
+
+h3#countJobPostingsText{
+    font-family: 'Open Sans', sans-serif;
+    margin-top: 28px;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.247);
+    color: antiquewhite;
+    text-align: center;
+    font-size: 28px;
+}
+
+div#tableDiv{
+    margin-top: 20px;
+}
