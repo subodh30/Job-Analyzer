@@ -18,6 +18,9 @@ import numpy as np  # noqa: E402
 import pymongo
 
 app = Flask(__name__)
+'''
+Variable to load the app module
+'''
 
 app.secret_key = b'\xe1\x04B6\x89\xf7\xa0\xab\xd1L\x0e\xfb\x1c\x08"\xf6'
 # client = pymongo.MongoClient('localhost', 27017)
@@ -25,17 +28,33 @@ app.secret_key = b'\xe1\x04B6\x89\xf7\xa0\xab\xd1L\x0e\xfb\x1c\x08"\xf6'
 
 
 mongo_conn = "mongodb+srv://subodh:se2022@cluster0.fcrvo9n.mongodb.net/job_analyzer"
+'''
+Mongo connection string
+'''
 mongo_params = "?tlsAllowInvalidCertificates=true&retryWrites=true&w=majority"
+'''
+Mongo parameters
+'''
 app.config["MONGO_URI"] = mongo_conn + mongo_params
 
 mongodb_client = PyMongo(app)
+'''
+Client connection 
+'''
 db = mongodb_client.db
 
 
 def login_required(f):
+    """
+    This function required login functionality
+    """
 
     @wraps(f)
+  
     def wrap(*args, **kwargs):
+        '''
+        This wrap function renders the redirect page
+        '''
         if 'logged_in' in session:
             return f(*args, **kwargs)
         else:
@@ -83,6 +102,9 @@ def login():
 
 @app.route('/search', methods=('GET', 'POST'))
 def search():
+    '''
+    This functions fetches data from database on the search filter
+    '''
     print(f"into search function ${request.method}")
     print(request)
     """
