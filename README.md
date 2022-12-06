@@ -56,7 +56,7 @@ Check [INSTALL.md](https://github.com/TejasPrabhu/Job-Analyzer/blob/main/INSTALL
 # To get started with project
 * Clone the repo
    ```
-    git clone https://github.com/TejasPrabhu/Job-Analyzer.git
+    git clone https://github.com/subodh30/Job-Analyzer.git
   
   ```
 * Setup virtual environment
