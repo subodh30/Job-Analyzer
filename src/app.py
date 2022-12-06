@@ -99,7 +99,6 @@ def login():
 
 
 @app.route('/search', methods=('GET', 'POST'))
-@login_required
 def search():
     '''
     This functions fetches data from database on the search filter
