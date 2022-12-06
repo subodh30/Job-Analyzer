@@ -9,6 +9,21 @@ from src.app import app, mongodb_client
 from flask import Flask, render_template, request
 from src.User.models import User
 
+@app.route('/user/signup', methods=['GET'])
+def showSignupPage():
+    return render_template('signup.html')
+
+    
+@app.route('/user/login', methods=['GET'])
+def showLoginPage():
+    return render_template('login.html')
+
+
+# @app.route('/user/profile', methods=['GET'])
+
+# def showUserProfile():
+#     return User().showProfile()
+
 
 @app.route('/user/signup', methods=['POST'])
 def signup():
@@ -16,6 +31,8 @@ def signup():
     User signup
     '''
     return User().signup()
+
+
 
 
 @app.route('/user/logout')
