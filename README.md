@@ -22,7 +22,7 @@
 [![DOI](https://zenodo.org/badge/555471755.svg)](https://zenodo.org/badge/latestdoi/555471755)
 
 
-
+## Group 20
 Juggling multiple assignments, quizzes, projects, presentations, and clutching the deadlines every week? Feel like you have no time to watch your favorite series or sports team play let alone search for job posting on a day-to-day basis? Here comes JobCruncher.
 
 JobCruncher is an online job scraping and analysis tool that provides the user with the ability to filter jobs posted on Linkedin based on the user’s interest. LinkedIn is an employment-oriented online service that is a platform primarily used for professional networking and career development. This allows job seekers to post their CVs and employers to post jobs, hence a perfect site to scrap the job details from.
@@ -35,7 +35,10 @@ So, leave the tedious and monotonous task of looking up the job postings to our 
 https://www.youtube.com/watch?v=_ASFR0DymiU&ab_channel=TejasPrabhu
 
 ## Project 2 Video
-https://user-images.githubusercontent.com/22406193/205811687-ced322a6-effa-4cfb-97c6-4d56f790cb2e.mp4
+
+
+https://user-images.githubusercontent.com/22406193/205814496-8c3c669d-8a57-4bb3-99bc-27c8a109b75a.mp4
+
 
 
 Unlike many other job portals, JobCruncher is a simple, lightweight, online tool that helps users get clear information about the jobs posted on LinkedIn and further help the user finetune the results.
