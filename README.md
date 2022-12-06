@@ -56,7 +56,7 @@ Check [INSTALL.md](https://github.com/TejasPrabhu/Job-Analyzer/blob/main/INSTALL
 # To get started with project
 * Clone the repo
    ```
-    git clone https://github.com/TejasPrabhu/Job-Analyzer.git
+    git clone https://github.com/subodh30/Job-Analyzer.git
   
   ```
 * Setup virtual environment
@@ -133,7 +133,7 @@ The `docs` folder incorporates all necessary documents and documentation in our 
 
 
 ## Roadmap
-We have a lot planned for the future! Completed tasks and future enhancements can be found [here](https://github.com/users/TejasPrabhu/projects/1)
+We have a lot planned for the future! Completed tasks and future enhancements can be found [here](https://github.com/users/subodh30/projects/3)
 ## Contributors
 Thanks goes to these wonderful people. 
 
