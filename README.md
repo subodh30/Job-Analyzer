@@ -6,6 +6,9 @@
 </p>
 
 
+
+
+
 [![GitHub](https://img.shields.io/github/license/TejasPrabhu/Job-Analyzer)](https://github.com/TejasPrabhu/Job-Analyzer/blob/main/LICENSE)
 [![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![GitHub issues](https://img.shields.io/github/issues-raw/TejasPrabhu/Job-Analyzer)](https://github.com/TejasPrabhu/Job-Analyzer/issues?q=is%3Aopen+is%3Aissue)
@@ -28,7 +31,12 @@ So, leave the tedious and monotonous task of looking up the job postings to our 
 
 # So why use JobCruncher instead?
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/v=_ASFR0DymiU&ab_channel=TejasPrabhu/0.jpg)](https://www.youtube.com/watch?v=_ASFR0DymiU&ab_channel=TejasPrabhu)
+## Project 1 Video
+https://www.youtube.com/watch?v=_ASFR0DymiU&ab_channel=TejasPrabhu
+
+## Project 2 Video
+https://user-images.githubusercontent.com/22406193/205811687-ced322a6-effa-4cfb-97c6-4d56f790cb2e.mp4
+
 
 Unlike many other job portals, JobCruncher is a simple, lightweight, online tool that helps users get clear information about the jobs posted on LinkedIn and further help the user finetune the results.
 
