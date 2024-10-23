@@ -26,7 +26,7 @@ app.secret_key = b'\xe1\x04B6\x89\xf7\xa0\xab\xd1L\x0e\xfb\x1c\x08"\xf6'
 # db = client.user_system
 
 
-mongo_conn = "mongodb+srv://subodh:se2022@cluster0.fcrvo9n.mongodb.net/job_analyzer"
+mongo_conn = "mongodb+srv://abivis2k:7aNqw7B9gsAfxznS@job-cluster.ayr8p.mongodb.net/db"
 '''
 Mongo connection string
 '''
