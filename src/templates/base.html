@@ -1,18 +1,20 @@
 <!doctype html>
 
 <html lang="en">
-    
+
 <style>
-    img.gif{
-  width: 180px;
-  height: auto;
-  float:left;
-  padding: 10px;
-}
-.container{
-    padding: 0 100px;
-}
+    img.gif {
+        width: 180px;
+        height: auto;
+        float: left;
+        padding: 10px;
+    }
+
+    .container {
+        padding: 0 100px;
+    }
 </style>
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -25,13 +27,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='main.css') }}">
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='base.css') }}">
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='index.css') }}">
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='login.css') }}">
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='get_job_postings.css') }}">
-    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='job_posting.css') }}">
-    
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='base.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='index.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='login.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='get_job_postings.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='job_posting.css') }}">
+
     <!-- <link rel="stylesheet" href="base.css"> -->
     <!-- <link rel="stylesheet" type= "text/css" href="../styles/base.css"> -->
 
@@ -39,9 +41,8 @@
 </head>
 
 <body>
-    <i class="fa-solid fa-magnifying-glass-dollar"></i>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-        <a class="navbar-brand" id="jobcrunchertitle" href="{{ url_for('index')}}" >JobCruncher</a>
+        <a class="navbar-brand" id="jobcrunchertitle" href="{{ url_for('index')}}">JobCruncher</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -52,7 +53,8 @@
                     <a class="nav-link" href="{{ url_for('index')}}"><i class="fas fa-home"></i>&nbsp; Home</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ url_for('search')}}"><i class="fa fa-search" aria-hidden="true"></i>&nbsp; Search for Jobs</a>
+                    <a class="nav-link" href="{{ url_for('search')}}"><i class="fa fa-search"
+                            aria-hidden="true"></i>&nbsp; Search for Jobs</a>
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
@@ -62,19 +64,21 @@
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link" href="{{ url_for('signup')}}">Signup</a>
-                </li> 
-                <li class="nav-item active">
-                    <a class="nav-link" href="{{ url_for('showUserProfile')}}"><i class="fas fa-user"></i>&nbsp; Profile</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="{{ url_for('signout')}}"><i class="fas fa-sign-out-alt"></i>&nbsp; Logout</a>
+                    <a class="nav-link" href="{{ url_for('showUserProfile')}}"><i class="fas fa-user"></i>&nbsp;
+                        Profile</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="{{ url_for('signout')}}"><i class="fas fa-sign-out-alt"></i>&nbsp;
+                        Logout</a>
                 </li>
             </ul>
         </div>
     </nav>
     <img class="gif" src="../static/jc.gif">
-    
-    
+
+
 
     <div class="container">
         {% block content %} {% endblock %}
