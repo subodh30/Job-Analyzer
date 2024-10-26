@@ -77,6 +77,8 @@ def lgin():
     Route: '/'
     The login function renders login.html page.
     """
+    if not 'isCredentialsWrong' in session:
+        session['isCredentialsWrong'] = False
     return render_template('login.html')
 
 
@@ -106,6 +108,7 @@ def login():
     Route: '/login'
     The index function renders the login.html page.
     """
+    session['isCredentialsWrong'] = False
     return render_template('login.html')
 
 

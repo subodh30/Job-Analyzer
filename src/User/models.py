@@ -63,8 +63,11 @@ class User:
             self.startSession(user)
             session['isCredentialsWrong'] = False
             return redirect('/home')
-        session['isCredentialsWrong'] = True
-        # return (jsonify({'error': 'Invalid login credentials'}), 401)
+        elif user and not pbkdf2_sha256.verify(str(request.form.get('password')), user['password']):
+            session['isCredentialsWrong'] = True
+            return redirect('/')
+        else:
+            return redirect('/')
 
     def showProfile(self):
         '''
