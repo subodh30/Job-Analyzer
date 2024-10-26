@@ -88,7 +88,9 @@ def index():
     """
     return redirect(url_for('login'))
 
+
 @app.route('/home')
+@login_required
 def home():
     """
     Route: '/home'
