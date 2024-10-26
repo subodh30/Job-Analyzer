@@ -28,6 +28,12 @@
                     <label class="form-label" for="form3Example4c">Password</label>
                   </div>
                 </div>
+                {% if session.isCredentialsWrong}
+                <label style="
+                      color: red;
+                      font-size: 12px;">Either email or password is incorrect. Please enter the credentials
+                  again</label>
+                {% endif % }
 
                 <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                   <button type="submit" class="btn btn-primary btn-lg">Submit</button>
