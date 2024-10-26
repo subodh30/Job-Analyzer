@@ -40,7 +40,7 @@ class User:
 
         if db.users.insert_one(user):
             self.startSession(user)
-            return redirect('/')
+            return redirect('/home')
 
 
 
@@ -57,11 +57,17 @@ class User:
         '''
         Session Login
         '''
+        session['isCredentialsWrong'] = False
         user = db.users.find_one({'email': request.form.get('email')})
         if user and pbkdf2_sha256.verify(str(request.form.get('password')), user['password']):
             self.startSession(user)
+            session['isCredentialsWrong'] = False
+            return redirect('/home')
+        elif user and not pbkdf2_sha256.verify(str(request.form.get('password')), user['password']):
+            session['isCredentialsWrong'] = True
             return redirect('/')
-        return (jsonify({'error': 'Invalid login credentials'}), 401)
+        else:
+            return redirect('/')
 
     def showProfile(self):
         '''

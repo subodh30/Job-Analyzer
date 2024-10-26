@@ -10,7 +10,7 @@ license that can be found in the LICENSE file or at
 https://opensource.org/licenses/MIT.
 """
 
-from flask import Flask, render_template, request, session, redirect  # noqa: E402
+from flask import Flask, render_template, request, session, redirect, url_for  # noqa: E402
 from flask_pymongo import PyMongo  # noqa: E402
 from pandas import DataFrame  # noqa: E402
 import re  # noqa: E402
@@ -72,11 +72,13 @@ def sgup():
 
 
 @app.route('/login')
-def lgin():
+def login():
     """
     Route: '/'
     The login function renders login.html page.
     """
+    if not 'isCredentialsWrong' in session:
+        session['isCredentialsWrong'] = False
     return render_template('login.html')
 
 
@@ -84,18 +86,30 @@ def lgin():
 def index():
     """
     Route: '/'
-    The index function renders the index.html page.
+    The index function renders the login.html page.
     """
+    return redirect(url_for('login'))
+
+
+@app.route('/home')
+@login_required
+def home():
+    """
+    Route: '/home'
+    The home function renders the index.html page
+    """
+    
     return render_template('index.html')
 
 
-@app.route('/login')
-def login():
-    """
-    Route: '/login'
-    The index function renders the login.html page.
-    """
-    return render_template('login.html')
+# @app.route('/login')
+# def login():
+#     """
+#     Route: '/login'
+#     The index function renders the login.html page.
+#     """
+#     session['isCredentialsWrong'] = False
+#     return render_template('login.html')
 
 
 @app.route('/search', methods=('GET', 'POST'))
