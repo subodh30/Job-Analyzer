@@ -40,7 +40,7 @@ class User:
 
         if db.users.insert_one(user):
             self.startSession(user)
-            return redirect('/')
+            return redirect('/home')
 
 
 
