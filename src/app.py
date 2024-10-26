@@ -88,6 +88,15 @@ def index():
     """
     return redirect(url_for('login'))
 
+@app.route('/home')
+def home():
+    """
+    Route: '/home'
+    The home function renders the index.html page
+    """
+    
+    return render_template('index.html')
+
 
 @app.route('/login')
 def login():
