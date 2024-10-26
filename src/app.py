@@ -84,9 +84,9 @@ def lgin():
 def index():
     """
     Route: '/'
-    The index function renders the index.html page.
+    The index function renders the login.html page.
     """
-    return render_template('index.html')
+    return render_template('login.html')
 
 
 @app.route('/login')
