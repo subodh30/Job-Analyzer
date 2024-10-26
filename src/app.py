@@ -10,7 +10,7 @@ license that can be found in the LICENSE file or at
 https://opensource.org/licenses/MIT.
 """
 
-from flask import Flask, render_template, request, session, redirect  # noqa: E402
+from flask import Flask, render_template, request, session, redirect, url_for  # noqa: E402
 from flask_pymongo import PyMongo  # noqa: E402
 from pandas import DataFrame  # noqa: E402
 import re  # noqa: E402
@@ -86,7 +86,7 @@ def index():
     Route: '/'
     The index function renders the login.html page.
     """
-    return render_template('login.html')
+    return redirect(url_for('login'))
 
 
 @app.route('/login')
