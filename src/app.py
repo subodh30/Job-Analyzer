@@ -72,7 +72,7 @@ def sgup():
 
 
 @app.route('/login')
-def lgin():
+def login():
     """
     Route: '/'
     The login function renders login.html page.
