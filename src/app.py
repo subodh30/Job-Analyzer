@@ -10,11 +10,12 @@ license that can be found in the LICENSE file or at
 https://opensource.org/licenses/MIT.
 """
 
-from flask import Flask, render_template, request, session, redirect, url_for  # noqa: E402
+from flask import Flask, render_template, request, session, redirect, url_for, send_file  # noqa: E402
 from flask_pymongo import PyMongo  # noqa: E402
 from pandas import DataFrame  # noqa: E402
 import re  # noqa: E402
 import numpy as np  # noqa: E402
+import gridfs
 
 app = Flask(__name__)
 '''
@@ -60,7 +61,6 @@ def login_required(f):
             return redirect('/')
 
     return wrap
-
 
 @app.route('/signup')
 def sgup():

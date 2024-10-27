@@ -2,11 +2,10 @@
 Contains user model functions
 '''
 
-from flask import jsonify, request, session, redirect, render_template
+from flask import jsonify, request, session, redirect, render_template, url_for
 from passlib.hash import pbkdf2_sha256
 from src.app import db, mongodb_client
 import uuid
-
 
 
 class User:
@@ -83,5 +82,18 @@ class User:
         if 'resume_file' in request.files:
             resume = request.files['resume_file']
             mongodb_client.save_file(resume.filename, resume)
-            mongodb_client.db.users.insert({'email': request.form.get('email'), 'resume_filename': resume.filename})
-        return render_template('user_profile.html')
+            
+            # Update the user in the database
+            user_email = session['user']['email']  # Get the current user's email
+            db.users.update_one(
+                {'email': user_email},  # Find the user by email
+                {'$set': {'resume_filename': resume.filename}}  # Update the resume filename
+            )
+            
+            # Update the session data with the new filename
+            session['user']['resume_filename'] = resume.filename
+
+        return render_template('user_profile.html', user=session['user'])
+
+
+

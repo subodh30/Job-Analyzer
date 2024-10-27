@@ -6,8 +6,9 @@ These are the end points related to the user
 import sys
 # sys.path.append('../src')
 from src.app import app, mongodb_client
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 from src.User.models import User
+
 
 @app.route('/user/signup', methods=['GET'])
 def showSignupPage():
@@ -66,6 +67,28 @@ def saveResume():
     Saves resume
     '''
     return User().saveResume()
+
+# @app.route('/download/<filename>')
+# def download_file(filename):
+#     '''
+#     Downloads a file from GridFS
+#     '''
+#     return mongodb_client.send_file(filename)
+
+@app.route('/download/<filename>')
+def download_file(filename):
+    try:
+        # Ensure you're using the correct method to fetch the file
+        file_data = mongodb_client.get_file(filename)  # Example: Adjust according to your MongoDB retrieval method
+        
+        if file_data:
+            return User(). send_file(file_data, as_attachment=True)  # Ensure 'file_data' is a valid file object
+        else:
+            return "File not found", 404
+    except Exception as e:
+        print(f"Error downloading file: {e}")  # Log the error for debugging
+        return "Internal Server Error", 500
+
 
 
 @app.route('/healthcheck', methods=['GET'])
