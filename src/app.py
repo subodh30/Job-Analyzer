@@ -206,5 +206,23 @@ def read_from_db(request, db):
     if skills != '':
         data_filter['skills'] = rgx_skills
 
-    data = db.jobs.find(data_filter)
+    data = list(db.jobs.find(data_filter))
+    user_id = session['user']['_id']
+    bookmarked_jobs = list(db.userjob.find({'user_id':user_id}))
+    for job in data:
+
+        job_id = job['_id']
+        flag = False
+
+        for bookmarked_job in bookmarked_jobs:
+            if bookmarked_job['job_id'] == job_id:
+                flag = True
+                break
+        
+        if flag:
+            job['bookmarked'] = '1'
+        else:
+            job['bookmarked'] = '0'
+        
+    data = sorted(data, key = lambda x: x['bookmarked'], reverse = True)
     return DataFrame(list(data))
