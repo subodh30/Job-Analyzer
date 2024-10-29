@@ -15,6 +15,7 @@ from flask_pymongo import PyMongo  # noqa: E402
 from pandas import DataFrame  # noqa: E402
 import re  # noqa: E402
 import numpy as np  # noqa: E402
+import requests
 
 app = Flask(__name__)
 '''
@@ -70,6 +71,33 @@ def sgup():
     """
     return render_template('signup.html')
 
+@app.route('/bookmark')
+def bookmark():
+    """
+    Route: '/bookmark'
+    Bookmark a job.
+    """
+    jobid = request.args.get('jobid')
+    bookmarked_job = {
+        'user_id': session['user']['_id'],
+        'job_id': int(jobid)
+    }
+    db.userjob.insert_one(bookmarked_job)
+
+    response = requests.post(url_for('search', _external = True), data={'title': '', 'location': '', 'companyName': '', 'skills':''})
+    return response.text
+
+@app.route('/unbookmark')
+def unbookmark():
+    """
+    Route: '/unbookmark'
+    Unbookmark a job.
+    """
+    jobid = request.args.get('jobid')
+    db.userjob.delete_one({'user_id': session['user']['_id'], 'job_id': int(jobid)})
+
+    response = requests.post(url_for('search', _external = True), data={'title': '', 'location': '', 'companyName': '', 'skills':''})
+    return response.text
 
 @app.route('/login')
 def login():
@@ -225,4 +253,11 @@ def read_from_db(request, db):
             job['bookmarked'] = '0'
         
     data = sorted(data, key = lambda x: x['bookmarked'], reverse = True)
+
+    for job in data:
+        if job['bookmarked'] == '1':
+            job['bookmarked'] = '<a href="/unbookmark?jobid=' + str(job['_id']) + '">📍</a>'
+        else:
+            job['bookmarked'] = '<a href="/bookmark?jobid=' + str(job['_id']) + '">📌</a>'
+    
     return DataFrame(list(data))
