@@ -84,8 +84,7 @@ def bookmark():
     }
     db.userjob.insert_one(bookmarked_job)
 
-    response = requests.post(url_for('search', _external = True), data={'title': '', 'location': '', 'companyName': '', 'skills':''})
-    return response.text
+    return redirect('/joblistings')
 
 @app.route('/unbookmark')
 def unbookmark():
@@ -96,8 +95,7 @@ def unbookmark():
     jobid = request.args.get('jobid')
     db.userjob.delete_one({'user_id': session['user']['_id'], 'job_id': int(jobid)})
 
-    response = requests.post(url_for('search', _external = True), data={'title': '', 'location': '', 'companyName': '', 'skills':''})
-    return response.text
+    return redirect('/joblistings')
 
 @app.route('/login')
 def login():
