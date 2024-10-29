@@ -187,7 +187,7 @@ def joblistings():
         request.form['location'] = ''
         request.form['companyName'] = ''
         request.form['skills'] = ''
-
+        job_df = read_from_db(request, db)
         job_count = job_df.shape[0]
         if job_df.empty:
             job_count = 0
