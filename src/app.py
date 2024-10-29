@@ -16,6 +16,8 @@ from pandas import DataFrame  # noqa: E402
 import re  # noqa: E402
 import numpy as np  # noqa: E402
 import gridfs
+import requests
+
 
 app = Flask(__name__)
 '''
@@ -70,6 +72,31 @@ def sgup():
     """
     return render_template('signup.html')
 
+@app.route('/bookmark')
+def bookmark():
+    """
+    Route: '/bookmark'
+    Bookmark a job.
+    """
+    jobid = request.args.get('jobid')
+    bookmarked_job = {
+        'user_id': session['user']['_id'],
+        'job_id': int(jobid)
+    }
+    db.userjob.insert_one(bookmarked_job)
+
+    return redirect('/joblistings')
+
+@app.route('/unbookmark')
+def unbookmark():
+    """
+    Route: '/unbookmark'
+    Unbookmark a job.
+    """
+    jobid = request.args.get('jobid')
+    db.userjob.delete_one({'user_id': session['user']['_id'], 'job_id': int(jobid)})
+
+    return redirect('/joblistings')
 
 @app.route('/login')
 def login():
@@ -110,21 +137,11 @@ def home():
 #     """
 #     session['isCredentialsWrong'] = False
 #     return render_template('login.html')
-
-
-@app.route('/search', methods=('GET', 'POST'))
-def search():
+@app.route('/joblistings', methods=('GET','POST'))
+def joblistings():
     '''
-    This functions fetches data from database on the search filter
+    This function fetches data from database on the search filter
     '''
-    print(f"into search function ${request.method}")
-
-    print(request)
-    """
-    Route: '/search'
-    The search function renders the get_job_postings.html.
-    Upon submission fetches the job postings from the database and renders job_posting.html
-    """
     if request.method == 'POST':
         print("into req post")
         print(db.get_collection)
@@ -145,23 +162,116 @@ def search():
         job_df['Job Link'] = job_df['Job Link'].fillna('----')
         return render_template('job_posting.html', job_count=job_count,
                                tables=['''
-    <style>
-        .table-class {border-collapse: collapse;    margin: 24px 0; 
-            font-size: 15px; background-color: #000000;
-        font-family: sans-serif;    min-width: 500px;    }
-        .table-class thead tr {background-color: #002147;    color: #ffffff; 
-           text-align: left; font-weight: 600; }
-        .table-class th,.table-class td {    text-align:center; padding: 12.4px 15.2px;}
-        .table-class tbody tr {border-bottom: 1px solid #ffffff; border-top-left-radius: 20px;
-         margin: 10px 0; border: 1px;border-color: white;}
-        .table-class tbody tr:nth-of-type(even) {    background-color: #20b2aa; color: white;}
-        .table-class tbody tr:nth-of-type(odd) {    background-color: #ffe4c4; }
-        .table-class tbody tr:last-of-type {    border-bottom: 2.1px solid #009878;}
-        .table-class tbody tr.active-row {  font-weight: bold;    color: #009878;}
-        table tr th { text-align:center; }
-    </style>
-    ''' + job_df.to_html(classes="table-class", render_links=True, escape=False)],
+                <style>
+                    .table-class {border-collapse: collapse;    margin: 24px 0; 
+                        font-size: 15px; background-color: #000000;
+                    font-family: sans-serif;    min-width: 500px;    }
+                    .table-class thead tr {background-color: #002147;    color: #ffffff; 
+                    text-align: left; font-weight: 600; }
+                    .table-class th,.table-class td {    text-align:center; padding: 12.4px 15.2px;}
+                    .table-class tbody tr {border-bottom: 1px solid #ffffff; border-top-left-radius: 20px;
+                    margin: 10px 0; border: 1px;border-color: white;}
+                    .table-class tbody tr:nth-of-type(even) {    background-color: #20b2aa; color: white;}
+                    .table-class tbody tr:nth-of-type(odd) {    background-color: #ffe4c4; }
+                    .table-class tbody tr:last-of-type {    border-bottom: 2.1px solid #009878;}
+                    .table-class tbody tr.active-row {  font-weight: bold;    color: #009878;}
+                    table tr th { text-align:center; }
+                </style>
+            ''' + job_df.to_html(classes="table-class", render_links=True, escape=False)],
             titles=job_df.columns.values)
+
+    elif request.method == 'GET': #If we hit redirect after bookmarking/unbookmarking a job listing.
+        print("into req get")
+        #Initializing a dummy POST data for the read_from_db function
+        request.form = {}
+        request.form['title'] = ''
+        request.form['location'] = ''
+        request.form['companyName'] = ''
+        request.form['skills'] = ''
+        job_df = read_from_db(request, db)
+        job_count = job_df.shape[0]
+        if job_df.empty:
+            job_count = 0
+            return render_template('no_jobs.html', job_count=job_count)
+        job_df = job_df.drop('Job Description', axis=1)
+        job_df = job_df.drop('_id', axis=1)
+        job_df = job_df.drop('Industries', axis=1)
+        job_df = job_df.drop('Job function', axis=1)
+        job_df = job_df.drop('Total Applicants', axis=1)
+        job_df['Job Link'] = '<a href=' + job_df['Job Link'] + '><div>' + " Apply " + '</div></a>'
+        job_link = job_df.pop("Job Link")
+        job_df.insert(7, "Job Link", job_link)
+        job_df['Job Link'] = job_df['Job Link'].fillna('----')
+        return render_template('job_posting.html', job_count=job_count,
+                               tables=['''
+                <style>
+                    .table-class {border-collapse: collapse;    margin: 24px 0; 
+                        font-size: 15px; background-color: #000000;
+                    font-family: sans-serif;    min-width: 500px;    }
+                    .table-class thead tr {background-color: #002147;    color: #ffffff; 
+                    text-align: left; font-weight: 600; }
+                    .table-class th,.table-class td {    text-align:center; padding: 12.4px 15.2px;}
+                    .table-class tbody tr {border-bottom: 1px solid #ffffff; border-top-left-radius: 20px;
+                    margin: 10px 0; border: 1px;border-color: white;}
+                    .table-class tbody tr:nth-of-type(even) {    background-color: #20b2aa; color: white;}
+                    .table-class tbody tr:nth-of-type(odd) {    background-color: #ffe4c4; }
+                    .table-class tbody tr:last-of-type {    border-bottom: 2.1px solid #009878;}
+                    .table-class tbody tr.active-row {  font-weight: bold;    color: #009878;}
+                    table tr th { text-align:center; }
+                </style>
+            ''' + job_df.to_html(classes="table-class", render_links=True, escape=False)],
+            titles=job_df.columns.values)
+
+@app.route('/search', methods=('GET', 'POST'))
+def search():
+    '''
+    This functions fetches data from database on the search filter
+    '''
+    print(f"into search function ${request.method}")
+
+    print(request)
+    """
+    Route: '/search'
+    The search function renders the get_job_postings.html.
+    Upon submission fetches the job postings from the database and renders job_posting.html
+    """
+    # if request.method == 'POST':
+    #     print("into req post")
+    #     print(db.get_collection)
+    #     job_df = read_from_db(request, db)
+    #     job_count = job_df.shape[0]
+    #     print(job_count)
+    #     if job_df.empty:
+    #         job_count = 0
+    #         return render_template('no_jobs.html', job_count=job_count)
+    #     job_df = job_df.drop('Job Description', axis=1)
+    #     job_df = job_df.drop('_id', axis=1)
+    #     job_df = job_df.drop('Industries', axis=1)
+    #     job_df = job_df.drop('Job function', axis=1)
+    #     job_df = job_df.drop('Total Applicants', axis=1)
+    #     job_df['Job Link'] = '<a href=' + job_df['Job Link'] + '><div>' + " Apply " + '</div></a>'
+    #     job_link = job_df.pop("Job Link")
+    #     job_df.insert(7, "Job Link", job_link)
+    #     job_df['Job Link'] = job_df['Job Link'].fillna('----')
+    #     return render_template('job_posting.html', job_count=job_count,
+    #                            tables=['''
+    # <style>
+    #     .table-class {border-collapse: collapse;    margin: 24px 0; 
+    #         font-size: 15px; background-color: #000000;
+    #     font-family: sans-serif;    min-width: 500px;    }
+    #     .table-class thead tr {background-color: #002147;    color: #ffffff; 
+    #        text-align: left; font-weight: 600; }
+    #     .table-class th,.table-class td {    text-align:center; padding: 12.4px 15.2px;}
+    #     .table-class tbody tr {border-bottom: 1px solid #ffffff; border-top-left-radius: 20px;
+    #      margin: 10px 0; border: 1px;border-color: white;}
+    #     .table-class tbody tr:nth-of-type(even) {    background-color: #20b2aa; color: white;}
+    #     .table-class tbody tr:nth-of-type(odd) {    background-color: #ffe4c4; }
+    #     .table-class tbody tr:last-of-type {    border-bottom: 2.1px solid #009878;}
+    #     .table-class tbody tr.active-row {  font-weight: bold;    color: #009878;}
+    #     table tr th { text-align:center; }
+    # </style>
+    # ''' + job_df.to_html(classes="table-class", render_links=True, escape=False)],
+    #         titles=job_df.columns.values)
     return render_template('get_job_postings.html')
 #         .table-class tbody tr:nth-of-type(odd) {    background-color: #e4ad46; }
 # ffe4c4
@@ -206,5 +316,30 @@ def read_from_db(request, db):
     if skills != '':
         data_filter['skills'] = rgx_skills
 
-    data = db.jobs.find(data_filter)
+    data = list(db.jobs.find(data_filter))
+    user_id = session['user']['_id']
+    bookmarked_jobs = list(db.userjob.find({'user_id':user_id}))
+    for job in data:
+
+        job_id = job['_id']
+        flag = False
+
+        for bookmarked_job in bookmarked_jobs:
+            if bookmarked_job['job_id'] == job_id:
+                flag = True
+                break
+        
+        if flag:
+            job['bookmarked'] = '1'
+        else:
+            job['bookmarked'] = '0'
+        
+    data = sorted(data, key = lambda x: x['bookmarked'], reverse = True)
+
+    for job in data:
+        if job['bookmarked'] == '1':
+            job['bookmarked'] = '<a href="/unbookmark?jobid=' + str(job['_id']) + '">📍</a>'
+        else:
+            job['bookmarked'] = '<a href="/bookmark?jobid=' + str(job['_id']) + '">📌</a>'
+    
     return DataFrame(list(data))
